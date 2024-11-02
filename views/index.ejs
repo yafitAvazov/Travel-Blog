@@ -1,0 +1,68 @@
+<%- include("partials/header.ejs") %>
+ <body style="background-image: url('styles/trip3.jpg');background-size: cover; background-position: center; background-repeat: no-repeat; height: 100vh; margin: 0;  "> 
+
+  
+
+
+
+<div class="px-6 py-6 mt-5 text-center">
+  <h1 class="display-4 mb-4 fw-bold text-body-emphasis">🌍🌴 Travel Blog 🌴🌍 </h1>
+  <div class="col-lg-6 mx-auto">
+    <h3 class="display-10 mb-4 " style="color: aliceblue;">Join the adventure! Document your travels, share cool tips, and show off those amazing places you’ve visited - it's like your personal travel diary online!</h3>
+    
+  </div>
+</div>
+
+
+<div class="container col-5">
+  <div class="form-group">
+    <form action="/submit" method="POST">
+      <div class="mb-3">
+        <label for="title" class="form-label" style="font-size: larger; font-weight: 500;">📍Destination Title:</label>
+        <input type="text" id="title" class="form-control" style="background-color: rgba(250, 235, 215, 0.717); color: black;" name="title" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="description" class="form-label"  style="font-size: larger; font-weight: 500;">🗺️Place Description</label>
+        <textarea class="form-control" id="description" name="description" style="background-color: rgba(250, 235, 215, 0.717); color: black;"  rows="4" ></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="tips" class="form-label"  style="font-size: larger; font-weight: 500;">💡Important Tips</label>
+        <textarea class="form-control"  id="tips" name="tips" style="background-color: rgba(250, 235, 215, 0.717); color: black;"  rows="3"> </textarea>
+      </div>
+
+      <div class="d-grid d-sm-flex justify-content-sm-center" >
+          <input type="submit"  class="btn btn-primary mt-3 py-6 " style="margin : 10px 10px; font-size: 1.5rem;" value="Post">
+      </div>
+</form>
+</div>
+</div>
+
+
+
+<% if (lists && lists.length > 0) { %>
+  <div class="px-4 pb-2 text-left">
+    <div class="col-lg-5 mx-auto"> <!-- עיטוף של כל הפוסטים במרכז -->
+      <% lists.forEach((post) => { %>
+        <div class="post-content" style="background-color: rgba(164, 119, 74, 0.925);color: rgb(255, 255, 255); border-radius: 7px; border: 0.5px solid black;padding: 10px;"> <!-- עיטוף עבור כל פוסט בודד -->
+          <h3 style="font-weight: 600;">Destination Title: <%= post.title %></h3>
+          <p style="font-weight: 600; font-size: large;">Place Description: <%= post.description %></p>
+          <p style="font-weight: 600; font-size: large;">Important Tip: <%= post.tips %></p>
+
+          <div class="d-grid gap-2 d-sm-flex"> 
+            <form action="/edit/<%= post.id %>" method="GET">
+              <button type="submit" class="btn btn-outline-primary my-2" style="color: black; border: 1px solid black;">Edit</button>
+            </form>
+            
+            <form action="/delete/<%= post.id %>?_method=DELETE" method="post">
+              <input type="hidden" name="_method" value="DELETE">
+              <button type="submit" class="btn btn-outline-light my-2" name="deleteBlog" style="color: black;">Delete</button>
+            </form>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  </div>
+<% } %>
+
+<%- include("partials/footer.ejs") %>

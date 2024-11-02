@@ -1,0 +1,37 @@
+<%- include("header.ejs") %>
+<body style="background-image: url('/styles/trip3.jpg');background-size: cover; background-position: center; background-repeat: no-repeat; height: 100vh; margin: 0;  "> 
+   
+    
+    
+    <div class="px-6 py-6 mt-5 text-center">
+      <h1 class="display-4 mb-4 fw-bold text-body-emphasis">🌍🌴 Travel Blog 🌴🌍 </h1>
+      <div class="col-lg-6 mx-auto">
+        <h3 class="display-10 mb-4 " style="color: aliceblue;">Join the adventure! Document your travels, share cool tips, and show off those amazing places you’ve visited - it's like your personal travel diary online!</h3>
+        
+      </div>
+    </div>
+
+<div class="container col-5">
+    <div class="form-group">
+        <form action="/edit/<%= post.id %>" method="POST">
+        <div class="mb-3">
+          <label for="title" class="form-label" style="font-size: larger; font-weight: 500;">📍Destination Title:</label>
+          <input type="text" id="title" class="form-control" style="background-color: rgba(250, 235, 215, 0.717); color: black;" name="title" value="<%= post.title %>" required>
+        </div>
+  
+        <div class="mb-3">
+          <label for="description" class="form-label"  style="font-size: larger; font-weight: 500;">🗺️Place Description</label>
+          <input class="form-control" id="description" name="description" style="background-color: rgba(250, 235, 215, 0.717); color: black;"  rows="4" value="<%= post.description %>" required>
+        </div>
+        <div class="mb-3">
+          <label for="tips" class="form-label"  style="font-size: larger; font-weight: 500;">💡Important Tips</label>
+          <input class="form-control"  id="tips" name="tips" style="background-color: rgba(250, 235, 215, 0.717); color: black;"  rows="3" value="<%= post.tips %>" required> 
+        </div>
+  
+        <div class="d-grid d-sm-flex justify-content-sm-center" >
+            <input type="submit"  class="btn btn-primary mt-3 py-6 " style="margin : 10px 10px; font-size: 1.5rem;" value="Update">
+        </div>
+  </form>
+  </div>
+  </div>
+  <%- include("footer.ejs") %>
